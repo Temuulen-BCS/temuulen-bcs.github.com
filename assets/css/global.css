@@ -4,7 +4,7 @@
 html { height: 100%; font-size: 100%; font: inherit; vertical-align: baseline;
 scroll-behavior: smooth; scroll-padding-top: 20px }
 body { 
-    background-color: lightgreen;
+    background-color: lightgray;
     line-height: 1.5; min-height: 100vh 
 }
 @media (max-width: 767px ) { body { text-rendering: optimizeSpeed } }

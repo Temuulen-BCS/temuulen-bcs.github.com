@@ -11,3 +11,76 @@ body {font-family: 'Playfair Display', serif ;}
 .theme-dark.section-selector-1 a:hover,
 .theme-dark.section-selector-1 a:active { color: var(--white-000) }
 header h1 { font-size: var(--font-size-xxxl) } 
+
+.container-text {
+    position: relative;
+    animation: slideDown 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    opacity: 0;
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.8);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(10px) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+h1 {
+    animation-delay: 0s;
+}
+
+h2 {
+    animation-delay: 0.6s;
+    animation-duration: 2.2s;
+}
+
+.moving-object {
+    position: absolute;
+    top: 50px;
+    left: -80px;
+    width: 100px;
+    height: auto;
+    border-radius: 25%;
+    animation: moveLeftRightGrow 20s ease-in-out infinite; /* Longer animation time for a smoother transition */
+}
+
+@keyframes moveLeftRightGrow {
+    0% {
+        transform: translateX(0) scale(1); /* Start on the left */
+    }
+    25% {
+        transform: translateX(50vw) scale(1); /* Move to the center */
+    }
+    30% {
+        transform: translateX(50vw) scale(1.5); /* Grow in the center */
+    }
+    35% {
+        transform: translateX(50vw) scale(1); /* Shrink back to normal size */
+    }
+    50% {
+        transform: translateX(100vw) scale(1); /* Continue to the right */
+    }
+    75% {
+        transform: translateX(50vw) scale(1); /* Come back to the center */
+    }
+    80% {
+        transform: translateX(50vw) scale(1.5); /* Grow again in the center */
+    }
+    85% {
+        transform: translateX(50vw) scale(1); /* Shrink back to normal size */
+    }
+    100% {
+        transform: translateX(0) scale(1); /* Return to the left */
+    }
+}
+
+
+

@@ -1,54 +1,152 @@
-/*  ============= WEB BROWSER RESETS ============ */
-* { margin: 0; padding: 0; border: none }
-*, *::before, *::after { box-sizing: border-box }
-html { height: 100%; font-size: 100%; font: inherit; vertical-align: baseline;
-scroll-behavior: smooth; scroll-padding-top: 20px }
-body { 
-    background-color: antiquewhite;
-    line-height: 1.5; min-height: 100vh 
+/* ============= WEB BROWSER RESETS ============ */
+* { 
+    margin: 0; 
+    padding: 0; 
+    border: none; 
 }
-@media (max-width: 767px ) { body { text-rendering: optimizeSpeed } }
-@media (min-width: 768px ) { body { text-rendering: optimizeLegibility } }
-img { width: 100%; height: auto; display: block }
-input, button, textarea, select { font: inherit }
+*, *::before, *::after { 
+    box-sizing: border-box; 
+}
+html { 
+    height: 100%; 
+    font-size: 100%; 
+    font: inherit; 
+    vertical-align: baseline;
+    scroll-behavior: smooth; 
+    scroll-padding-top: 20px; 
+}
+body { 
+    background-color: white;
+    line-height: 1.5; 
+    min-height: 100vh;
+}
 
-/* ====== PADDING AROUND WEB PAGE BODY CONTENT ======  */
-/* Desktops */
+/* Text Rendering for Different Screen Sizes */
+@media (max-width: 767px) { 
+    body { text-rendering: optimizeSpeed; } 
+}
+@media (min-width: 768px) { 
+    body { text-rendering: optimizeLegibility; } 
+}
+
+/* Responsive Padding Around Body Content */
 @media (min-width: 768px) {
-    body { padding: 4% 20% }
- }
- 
- /* Mobiles */
- @media (max-width: 767px) {
-    body { padding: 8% 5% }
- }
-h1 {
-    color: brown;
-    font-size: 84px;
+    body { padding: 4% 20%; }
+}
+@media (max-width: 767px) {
+    body { padding: 8% 5%; }
+}
+
+/* ============= ELEMENT STYLES ============ */
+img { 
+    width: 100%; 
+    height: auto; 
+    display: block; 
+}
+input, button, textarea, select { 
+    font: inherit; 
+}
+
+/* ============= BACKGROUND VIDEO AND MAIN STYLING ============ */
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.5);
+}
+
+/* Container Styling */
+main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
     text-align: center;
-    font-weight: normal;
+}
+
+/* ============= TYPOGRAPHY ============ */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;600&display=swap');
+
+/* Headings with Fluid Font Sizes and Animation */
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    animation: fadeIn 2s ease-in-out;
+    text-align: center;
+}
+
+h1 {
+    font-size: clamp(2rem, 6vw, 5.25rem);
+    color: white;
+    font-weight: 600;
     letter-spacing: -2px;
     margin-bottom: 32px;
+    animation-delay: 0.5s;
 }
 
 h2 {
-    color: brown;
-    font-size: 36px;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: white;
+    font-weight: 400;
     margin-bottom: 4px;
+    animation-delay: 1s;
 }
 
 h3 {
-    color: brown;
-    font-size: 24px;
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    color: white;
+    font-weight: 300;
     margin-bottom: 4px;
+    animation-delay: 1.5s;
+    margin-top: 20px;
 }
 
+/* Paragraph Styling */
 p {
-    font-size: 18px;
-    font-family: sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     margin-bottom: 20px;
+    color: white;
 }
-/* This is a comment in a CSS file */ 
-/* This is a comment in a CSS file */ 
-/* This is a comment in a CSS file */ 
+
+/* ============= LINK STYLING ============ */
+a {
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+/* ============= ANIMATIONS ============ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============= FOOTER STYLING ============ */
+footer {
+    margin-top: 50px;
+    font-size: 0.9rem;
+    color: white;
+}
+footer a {
+    color: white;
+}
+footer a:hover {
+    color: white;
+}

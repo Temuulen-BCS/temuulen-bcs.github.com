@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        /* Global Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Background Video */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(0.8); /* Slight darkening for better text visibility */
+        }
+
+        /* Content Container */
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        /* Button Styles */
+        .button {
+            background: rgba(244, 162, 97, 0.8); /* Warm Sunset Orange with transparency */
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: #FFF8E7; /* Soft Ivory Text */
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+        }
+
+        /* Button Hover Effects */
+        .button:hover {
+            background: rgba(255, 118, 82, 0.8); /* Deep Rust Red for hover */
+            color: #FFF; /* Bright white text */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transform: scale(1.05); /* Slight grow on hover */
+        }
+
+        /* Slide-Out Animation */
+        .slide-out {
+            animation: slideUp 1s forwards;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        /* Hidden iframe for preloading */
+        iframe#preloadIframe {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay loop muted class="video-background">
+        <source src="store/assets/video/Untitled video - Made with Clipchamp (2).mp4" type="video/mp4">
+        <!-- Fallback for unsupported browsers -->
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Content -->
+    <div class="content">
+        <a href="index.html" class="button" id="homeButton">Home Page</a>
+    </div>
+
+    <!-- Hidden iframe for preloading -->
+    <iframe id="preloadIframe" src="index.html"></iframe>
+
+    <script>
+        const homeButton = document.getElementById('homeButton');
+
+        // Event listener for the button click
+        homeButton.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default navigation
+            document.body.classList.add('slide-out'); // Trigger the slide-out animation
+
+            // Delay navigation to allow the animation to complete
+            setTimeout(() => {
+                window.location.href = homeButton.getAttribute('href');
+            }, 1000); // Match animation duration
+        });
+    </script>
+</body>
+</html>

@@ -24,3 +24,4 @@
 .section-selector-1 a.btn:hover,
 .section-selector-1 a.btn:active { border-color: var(--yellow-500) }
 
+footer { padding: 10px; }

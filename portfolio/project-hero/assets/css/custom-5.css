@@ -6,7 +6,7 @@
 /* =============== Add your custom CSS below =========== */
 header.theme-dark .badge { color: var(--white-000) }
 header.theme-dark .badge { background-color: var(--black-000) }
-header.theme-dark h1 { color: var(--green-400) }
+header.theme-dark h2 { color: var(--green-400) }
 header.theme-dark .container-btn a.btn:nth-child(1):link,
 header.theme-dark .container-btn a.btn:nth-child(1):visited { color: var(--white-000) }
 
@@ -53,17 +53,20 @@ header.theme-dark .badge {
     text-decoration-color: var(--green-400);
     text-decoration-style: wavy;
     background-color: black !important;
-    color: #fff !important;
+    color: #fff  !important;
 }
  
-header.theme-dark h1 {
+header.theme-dark h2 {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 600;
     letter-spacing: 4px;
     font-size: var(--font-size-xxxl);
 }
  
-header.theme-dark h2 {
+header.theme-dark h1 {
     font-family: 'Zilla Slab', serif;
-    font-weight: 400;
+    font-weight: 100;
+    position:relative;
+    display: inline-block;
 }
+

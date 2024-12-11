@@ -1,0 +1,91 @@
+
+nav.theme-light .container-menu a:hover {
+    color: #2D2A1D;
+}
+
+nav.theme-light .nav-toggle {
+    display: none;
+
+}
+
+section.theme-light {
+    padding: 60px 0;
+    background-color: #FFF8E7;
+}
+
+.flex-cols-3 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.header h1{
+    display:flex;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.header.container-text h2{
+    font-style: 'Sans-Serif';
+    font-size: small;
+}
+
+.flex-cols-3 .col-3 figure:hover img {
+    transform: scale(1.05);
+}
+
+.flex-cols-3 .col-3 h3 {
+    color: #2D2A1D;
+}
+
+.flex-cols-3 .col-3 p {
+    color: #2D2A1D;
+}
+
+.flex-cols-3 .col-3 .btn {
+    background-color: #D6A95B;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.flex-cols-3 .col-3 .btn:hover {
+    background-color: #2D2A1D;
+}
+
+footer.theme-dark {
+    background-color: #ffc500;
+    color: #FFF8E7;
+    padding: 40px 0;
+    text-align: center;
+}
+
+
+footer .footer-links li a,
+footer .footer-icons li a {
+    color: #FFF8E7;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+footer .footer-icons li a {
+    font-size: 1.5em;
+}
+
+footer .footer-links li a:hover,
+footer .footer-icons li a:hover {
+    color: #D6A95B;
+}
+
+footer .privacy {
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+footer .privacy a {
+    color: #FFF8E7;
+    text-decoration: none;
+}
+
+footer .privacy a:hover {
+    color: #D6A95B;
+}
+

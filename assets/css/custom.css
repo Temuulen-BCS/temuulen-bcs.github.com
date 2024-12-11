@@ -1,13 +1,11 @@
 body {
-    background-color: #F4E1A1;
-    color: #3A3A3A;
+
     font-family: 'Rock Salt', cursive, sans-serif;
     font-size: 16px;
 }
 
 header {
-    background-color: #D8C8A9;
-    color: #3A3A3A;
+    color: #FFF;
     text-align: center;
     padding: 60px 0;
     position: relative;
@@ -26,7 +24,7 @@ header .badge {
 
 header h1 {
     font-size: 48px;
-    color: #3A3A3A;
+
     margin-bottom: 20px;
     text-transform: uppercase;
     font-weight: bold;

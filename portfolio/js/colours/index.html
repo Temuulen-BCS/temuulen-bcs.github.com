@@ -23,23 +23,12 @@
         .theme-js h3 { color: #222 }
         .theme-js p { color: #222 }
 
-        /* Button Colours: passive state */
-        .theme-js a.btn {
-            color: #fff; background-color: blue; transition: 0.2s;
-            border-radius: 6px
-        }
-
-        /* Button Colours: active state */
-        .theme-js a.btn:hover { background-color: darkblue }
-
-        .theme-js a.btn { background-image: linear-gradient(to right,#e052a0,#f15c41) }
-        .theme-js a.btn:hover { filter: brightness(140%) saturate(140%) }
+        .theme-js .btn:hover {background-color: darkblue;}
 
         /* ===== END PAGE CUSTOM COLOURS ==========*/
 
         /* ===== THIS PROJECT ONLY ==========*/
 
-        .theme-js { background-color:#dbf4e4; text-align: center }
 
         .theme-js h2 {
             text-align: center; margin: 0 auto;
@@ -50,23 +39,37 @@
         }
 
         #color-display { background-color: green; font-weight: 400; padding: 6px 10px  }
+        .theme-js {
+        transition: background-color 0.4s ease-in-out;
+        }
+
 
         .theme-js p { width: 100% }
+        /* Cleaned up and focused styling */
+
         #btn-color {
             display: block;
             text-align: center;
             margin: 20px auto 0 auto;
             padding: 20px 28px;
-            border: 1px none #000;
+            border: none;
             background-color: blue;
+            background-image: linear-gradient(to right, #e052a0, #f15c41);
             transition: all 350ms ease;
             color: #fff;
             font-size: 18px;
             line-height: 1;
             border-radius: 50px;
         }
-        #btn-color:hover {background-color: darkblue }
-        #btn-color i { margin-right: 10px }
+
+        #btn-color:hover {
+            background-color: darkblue;
+            filter: brightness(140%) saturate(140%);
+        }
+
+        #btn-color i {
+            margin-right: 10px;
+        }
 
     </style>
 
@@ -84,8 +87,8 @@
         <a href="../../../index.html"><img src="../assets/img/website-logo-sample.png" alt="website logo"></a>
         <ul class="">
             <li><a href="../index.html">Home</a></li>
-            <li><a href="../portfolio/index.html">Portfolio</a></li>
-            <li><a href="../contact/index.html" id="btn-cta"><span>Contact</span><i class="fas fa-arrow-right"></i></a></li>
+            <li><a href="../index.html">Portfolio</a></li>
+            <li><a href="../../../contact/index.html" id="btn-cta"><span>Contact</span><i class="fas fa-arrow-right"></i></a></li>
         </ul>
         <div class="item-icon">
             <div class="bar1"></div>
@@ -155,7 +158,7 @@
 
 		<ul class="footer-icons">
 			<li><a href="https://www.linkedin.com/nnnnnnnnnnn" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-			<li><a href="https://github.com/nnnnnnnnnn" target="_blank"><i class="fab fa-github-square"></i></a></li>
+			<li><a href="https://github.com/Temuulen-BCS/temuulen-bcs.github.com" target="_blank"><i class="fab fa-github-square"></i></a></li>
 		</ul>
 
 		<p class="index.html"> <a href="../../../privacy.html" style="color: #fff; background-color:transparent;">Privacy &amp; Legal</a> </p>

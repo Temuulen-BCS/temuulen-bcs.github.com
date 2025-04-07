@@ -1,22 +1,3 @@
-function populateTableRows() {
-    let strTableRows = `<tr>
-        <td><span>Summary</span></td>
-        <td>Row 1, Cell 2</td>
-    </tr>
-    <tr>
-        <td><span>Temperature</span></td>
-        <td>Row 2, Cell 2</td>
-    </tr>
-    <tr>
-        <td><span>Humidity</span></td>
-        <td>Row 3, Cell 2</td>
-   </tr>
-   <tr>
-        <td><span>Pressure</span></td>
-        <td>Row 4, Cell 2</td>
-    </tr>`;
-    document.querySelector("#table-weather-dublin tbody").innerHTML = strTableRows;
-}
 
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", populateTableRows);
@@ -63,7 +44,7 @@ function change_background() {
     let d = new Date();
     let n = d.getHours();
     if (n > 23 || n <= 6) {
-        document.querySelector(".theme-js").style.backgroundImage  = "url('assets/img/dublin-night.jpg')";
+         document.querySelector(".theme-js").style.backgroundImage  = "url('assets/img/dublin-night.jpg')";
     } else {
         document.querySelector(".theme-js").style.backgroundImage  = "url('assets/img/dublin-day.jpg')";
     }

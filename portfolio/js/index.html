@@ -46,6 +46,38 @@
         .theme-js a.btn { background-image: linear-gradient(to right,#e052a0,#f15c41) }
         .theme-js a.btn:hover { filter: brightness(140%) saturate(140%) }
 
+        #btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-image: linear-gradient(to right,#e052a0,#f15c41);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, filter 0.3s ease;
+    border: none;
+}
+
+#btn-cta:hover {
+    filter: brightness(140%) saturate(140%);
+}
+    #btn-cta:focus {
+    background-color: #333;
+    color: #fff;
+    }
+
+    #btn-cta i {
+    transition: transform 0.3s ease;
+    }
+
+    #btn-cta:hover i {
+    transform: translateX(5px);
+    }
+
+
     </style>
 
 	<!-- Font Awesome 6.1 icons -->
@@ -184,6 +216,17 @@
 
                 <div class="container-btn">
                     <a href="image-slideshow/index.html" class="btn btn-primary"><span>View project</span> <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-4">
+
+                <h3>Vertical AI App</h3>
+
+                <p>A slideshow with an array of images from Dublin city, Ireland.</p>
+
+                <div class="container-btn">
+                    <a href="Vercal-Ai-app/index.html" class="btn btn-primary"><span>View project</span> <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
 

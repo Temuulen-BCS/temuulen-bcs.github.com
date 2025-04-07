@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dublin Weather App</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            color: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .flex-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .city-name {
+            font-size: 1.875rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .weather-icon {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .temperature {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        .condition {
+            font-size: 1.25rem;
+            text-transform: capitalize;
+        }
+
+        .weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .detail-box {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .detail-label {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        .detail-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .time-container {
+            width: 100%;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .current-time {
+            font-size: 1.125rem;
+        }
+
+        /* Weather icon colors */
+        .sunny {
+            color: #FACC15;
+        }
+
+        .cloudy {
+            color: #9CA3AF;
+        }
+
+        .rainy {
+            color: #60A5FA;
+        }
+
+        .windy {
+            color: #93C5FD;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 1.25rem;
+            padding: 2rem;
+        }
+
+        .error {
+            color: #EF4444;
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-content">
+            <div id="weather-container" class="flex-col">
+                <div id="loading" class="loading">Loading weather data...</div>
+                <div id="error" class="error" style="display: none;"></div>
+            </div>
+            <div id="weather-data" class="flex-col" style="display: none;">
+                <!-- City Name -->
+                <h1 id="city-name" class="city-name">Dublin</h1>
+                
+                <!-- Weather Icon and Temperature -->
+                <div style="text-align: center;">
+                    <i id="weather-icon" class="weather-icon fas fa-cloud cloudy"></i>
+                    <p id="temperature" class="temperature">15°C</p>
+                    <p id="condition" class="condition">cloudy</p>
+                </div>
+                
+                <!-- Weather Details -->
+                <div class="weather-details">
+                    <div class="detail-box">
+                        <p class="detail-label">Humidity</p>
+                        <p id="humidity" class="detail-value">78%</p>
+                    </div>
+                    <div class="detail-box">
+                        <p class="detail-label">Pressure</p>
+                        <p id="pressure" class="detail-value">1008 hPa</p>
+                    </div>
+                </div>
+                
+                <!-- Time -->
+                <div class="time-container">
+                    <p id="current-time" class="current-time"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API URL
+        const API_URL = 'https://api.openweathermap.org/data/2.5/weather?q=dublin,ie&units=metric&APPID=bc425ac2188d406c884f4fdd88b339f0';
+        
+        // Elements
+        const loadingElement = document.getElementById('loading');
+        const errorElement = document.getElementById('error');
+        const weatherDataElement = document.getElementById('weather-data');
+        const cityNameElement = document.getElementById('city-name');
+        const temperatureElement = document.getElementById('temperature');
+        const conditionElement = document.getElementById('condition');
+        const humidityElement = document.getElementById('humidity');
+        const pressureElement = document.getElementById('pressure');
+        const currentTimeElement = document.getElementById('current-time');
+        const weatherIconElement = document.getElementById('weather-icon');
+
+        // Map OpenWeatherMap condition codes to our simplified conditions
+        function mapWeatherCondition(weatherId) {
+            // Weather condition codes: https://openweathermap.org/weather-conditions
+            if (weatherId >= 200 && weatherId < 600) {
+                return "rainy"; // Thunderstorm, Drizzle, Rain
+            } else if (weatherId >= 600 && weatherId < 700) {
+                return "cloudy"; // Snow
+            } else if (weatherId >= 700 && weatherId < 800) {
+                return "windy"; // Atmosphere (mist, fog, etc.)
+            } else if (weatherId === 800) {
+                return "sunny"; // Clear sky
+            } else if (weatherId > 800) {
+                return "cloudy"; // Clouds
+            }
+            return "cloudy"; // Default
+        }
+
+        // Update weather icon based on condition
+        function updateWeatherIcon(condition) {
+            // Remove all classes except 'weather-icon'
+            weatherIconElement.className = 'weather-icon';
+            
+            // Add appropriate icon and color class
+            switch(condition) {
+                case "sunny":
+                    weatherIconElement.classList.add('fas', 'fa-sun', 'sunny');
+                    break;
+                case "cloudy":
+                    weatherIconElement.classList.add('fas', 'fa-cloud', 'cloudy');
+                    break;
+                case "rainy":
+                    weatherIconElement.classList.add('fas', 'fa-cloud-rain', 'rainy');
+                    break;
+                case "windy":
+                    weatherIconElement.classList.add('fas', 'fa-wind', 'windy');
+                    break;
+                default:
+                    weatherIconElement.classList.add('fas', 'fa-cloud', 'cloudy');
+            }
+        }
+
+        // Fetch weather data
+        async function fetchWeatherData() {
+            try {
+                loadingElement.style.display = 'block';
+                errorElement.style.display = 'none';
+                weatherDataElement.style.display = 'none';
+                
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`Weather data not available (${response.status})`);
+                }
+                
+                const data = await response.json();
+                
+                // Update UI with weather data
+                cityNameElement.textContent = data.name;
+                temperatureElement.textContent = `${Math.round(data.main.temp)}°C`;
+                
+                const weatherCondition = mapWeatherCondition(data.weather[0].id);
+                conditionElement.textContent = data.weather[0].description;
+                updateWeatherIcon(weatherCondition);
+                
+                humidityElement.textContent = `${data.main.humidity}%`;
+                pressureElement.textContent = `${data.main.pressure} hPa`;
+                
+                // Show weather data
+                loadingElement.style.display = 'none';
+                weatherDataElement.style.display = 'flex';
+                
+                // Log for debugging
+                console.log('Weather data:', data);
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+                loadingElement.style.display = 'none';
+                errorElement.textContent = `Failed to load weather data: ${error.message}`;
+                errorElement.style.display = 'block';
+            }
+        }
+
+        // Update time and check day/night
+        function updateTimeAndBackground() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            
+            // Format time as HH:MM
+            const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            currentTimeElement.textContent = formattedTime;
+            
+            // Check if it's daytime (between 6 AM and 6 PM)
+            const isDaytime = hours >= 6 && hours < 18;
+            
+            // Set background based on time of day
+            if (isDaytime) {
+                document.body.style.backgroundImage = "url('../assets/dublin241.jpeg')";
+            } else {
+                document.body.style.backgroundImage = "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Dublin%20Convention%20Centre%20and%20Samuel%20Beckett%20Bridge%20reflected%20in%20the%20River%20Liffey%2C%20Dublin%20City_Web%20Size.jpg-PglNxtNH65r9JbZZfeeWdMzXshzYPg.jpeg')";
+            }
+        }
+
+        // Initial setup
+        fetchWeatherData();
+        updateTimeAndBackground();
+        
+        // Update time every minute
+        setInterval(updateTimeAndBackground, 60000);
+        
+        // Refresh weather data every 30 minutes (1800000 ms)
+        setInterval(fetchWeatherData, 1800000);
+
+        function change_background() {
+    let d = new Date();
+    let n = d.getHours();
+    if (n > 23 || n <= 6) {
+         document.querySelector(".theme-js").style.backgroundImage  = "url('assets/dublin241.jpeg')";
+    } else {
+        document.querySelector(".theme-js").style.backgroundImage  = "url('assets/img/dublin-day.jpg')";
+    }
+}
+change_background();
+    </script>
+</body>
+</html>
